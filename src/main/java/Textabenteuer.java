@@ -34,6 +34,7 @@ public class Textabenteuer {
     private final Raum kitchen;
     private final ArrayList<Gegenstand> items;
     private final Ausruestung egg;
+    private boolean eggFound;
 
     /**
      * Der Konstruktor hier erstellt alle Räume, Gegenstände und Ausrüstungen
@@ -69,18 +70,7 @@ public class Textabenteuer {
 
         items = new ArrayList<Gegenstand>();
 
-        while (true) {
-            int random = (int) (Math.random() * 10);
-            if (random == 0) {
-                break;
-            } else if (random >= 1 && random <= 3) {
-                Verbrauchsgegenstand junk = new Verbrauchsgegenstand("Papiere", 1);
-            } else if (random >= 4 && random <= 6) {
-                Verbrauchsgegenstand name = new Verbrauchsgegenstand("Papiere", 1);
-            } else if (random >= 7 && random <= 9) {
-                Verbrauchsgegenstand name = new Verbrauchsgegenstand("Papiere", 1);
-            }
-        }
+        eggFound = false;
     }
 
     /**
@@ -192,6 +182,7 @@ public class Textabenteuer {
                     break;
 
                 case "nutzen":
+                    Gegenstand itemToAdd = null;
                     System.out.println();
                     System.out.println(ANSI_RED + "Welchen Gegenstand möchtest du nutzen? ");
                     String itemName2 = scanner.nextLine();
@@ -213,7 +204,7 @@ public class Textabenteuer {
                                     System.out.println(ANSI_GREEN + "Die Lampe hilft dir im hellen Raum doch nichts. Du stellst sie wieder aus.");
                                 }
                             } else if (item.getName().equals("Göffel")) {
-                                if (currentRoom.equals(livingroom)) {
+                                if (currentRoom.equals(livingroom) && !eggFound) {
                                     System.out.println();
                                     System.out.println(ANSI_GREEN + "Du spielst mit dem Göffel herum und dummerweise reisst du dabei das Sofa auf.");
                                     try {
@@ -224,7 +215,8 @@ public class Textabenteuer {
                                     System.out.println(ANSI_GREEN + "Aber warte, da ist doch ein Ei drin.");
                                     System.out.println(ANSI_GREEN + "Du hast das Ei aufgehoben.");
                                     livingroom.addItems(egg);
-                                    items.add(currentRoom.getItem("Ei"));
+                                    itemToAdd = egg;
+                                    eggFound = true;
                                     try {
                                         currentRoom.removeItem("Ei");
                                     } catch (ItemNotInRoomException e) {
@@ -270,7 +262,7 @@ public class Textabenteuer {
                                     } catch (InterruptedException e) {
                                         throw new RuntimeException(e);
                                     }
-                                    System.out.println(ANSI_GREEN + "Es ist ein seltsamer Mann mit einer Axt. Er scheint zu warten bis du dass Ei fertig gekocht hast. \nIhr esst zusammen das Ei und geniesst euren Abend.");
+                                    System.out.println(ANSI_GREEN + "Es ist ein seltsamer Mann mit einer Axt. Er scheint zu warten bis du das Ei fertig gekocht hast. \nIhr esst zusammen das Ei und geniesst euren Abend.");
                                     System.out.println(ANSI_GREEN + "---------------------------");
                                     System.out.println(ANSI_BLUE + "WEIRD ENDING");
                                     System.out.println(ANSI_GREEN + "---------------------------");
@@ -315,6 +307,10 @@ public class Textabenteuer {
                                 }
                             }
                         }
+                    }
+                    if (itemToAdd != null) {
+                        items.add(egg);
+                        itemToAdd = null;
                     }
                     System.out.println();
                     break;
