@@ -7,6 +7,7 @@ import Exceptions.ItemNotInRoomException;
 import Utility.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -72,21 +73,22 @@ public class Textabenteuer {
 
         eggFound = false;
 
-        int random = (int) (Math.random() * (10 - 0) + 0);
-        for (int i = 0; i < random; i++) {
-            int j = (int) (Math.random() * (10 - 0) + 0);
+        Random random = new Random();
+        int k = 0;
+        int l = random.nextInt(11);
+        for (int i = 0; i < l; i++) {
+            int j = random.nextInt(11);
+            k++;
             if (j >= 0 && j <= 1) {
-                bedroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+                bedroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand " + k, i));
             } else if (j >= 2 && j <= 3) {
-                hallway.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+                hallway.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + k, i));
             } else if (j >= 4 && j <= 5) {
-                library.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+                library.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + k, i));
             } else if (j >= 6 && j <= 7) {
-                livingroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+                livingroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + k, i));
             } else if (j >= 8 && j <= 9) {
-                basement.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
-            } else {
-                break;
+                basement.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + k, i));
             }
         }
     }
@@ -267,7 +269,7 @@ public class Textabenteuer {
                                     System.out.println("Your points: " + points);
                                     System.out.println("Your turns: " + turns);
                                     System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.2 + moves * 0.5)));
+                                    System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
                                     exit(1);
                                 } else {
                                     System.out.println();
@@ -290,7 +292,7 @@ public class Textabenteuer {
                                     System.out.println("Your points: " + points * 1.5);
                                     System.out.println("Your turns: " + turns);
                                     System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.2 + moves * 0.5)));
+                                    System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
                                     exit(3);
                                 } else {
                                     System.out.println();
@@ -320,7 +322,7 @@ public class Textabenteuer {
                                     System.out.println("Your points: " + points * 2);
                                     System.out.println("Your turns: " + turns);
                                     System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.2 + moves * 0.5)));
+                                    System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
                                     exit(2);
                                 } else if (currentRoom.equals(library)) {
                                     System.out.println();
@@ -329,6 +331,9 @@ public class Textabenteuer {
                                     System.out.println();
                                     System.out.println(ANSI_GREEN + "Du öffnest das Buch und blätterst durch die Seiten. Du kannst die Zeichen nicht lesen.");
                                 }
+                            } else {
+                                System.out.println();
+                                System.out.println(ANSI_GREEN + "Du kannst diesen Gegenstand nicht benutzen.");
                             }
                         }
                     }
