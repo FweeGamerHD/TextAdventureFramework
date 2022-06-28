@@ -72,20 +72,19 @@ public class Textabenteuer {
 
         eggFound = false;
 
-        int random = (int) (Math.random() * 10);
-        for (int j =  (int) (Math.random() * 10); j < random; j = (int) (Math.random() * 10)) {
-            if (j <= 1) {
-                basement.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
-            } else if (j <= 3 && j > 1) {
-                hallway.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
-            } else if (j <= 4 && j > 3) {
-                library.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
-            } else if (j <= 6 && j > 5) {
-                livingroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
-            } else if (j <= 7 && j > 6) {
+        int random = (int) (Math.random() * (10 - 0) + 0);
+        for (int i = 0; i < random; i++) {
+            int j = (int) (Math.random() * (10 - 0) + 0);
+            if (j >= 0 && j <= 1) {
                 bedroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
-            } else if (j <= 9 && j > 8) {
-                kitchen.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+            } else if (j >= 2 && j <= 3) {
+                hallway.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+            } else if (j >= 4 && j <= 5) {
+                library.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+            } else if (j >= 6 && j <= 7) {
+                livingroom.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
+            } else if (j >= 8 && j <= 9) {
+                basement.addItems(new Verbrauchsgegenstand("unnützerGegenstand" + j, j));
             } else {
                 break;
             }
@@ -268,7 +267,7 @@ public class Textabenteuer {
                                     System.out.println("Your points: " + points);
                                     System.out.println("Your turns: " + turns);
                                     System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.5 + moves)));
+                                    System.out.println("Your final score: " + (points - (turns * 0.2 + moves * 0.5)));
                                     exit(1);
                                 } else {
                                     System.out.println();
@@ -291,7 +290,7 @@ public class Textabenteuer {
                                     System.out.println("Your points: " + points * 1.5);
                                     System.out.println("Your turns: " + turns);
                                     System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.5 + moves)));
+                                    System.out.println("Your final score: " + (points - (turns * 0.2 + moves * 0.5)));
                                     exit(3);
                                 } else {
                                     System.out.println();
@@ -321,7 +320,7 @@ public class Textabenteuer {
                                     System.out.println("Your points: " + points * 2);
                                     System.out.println("Your turns: " + turns);
                                     System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.5 + moves)));
+                                    System.out.println("Your final score: " + (points - (turns * 0.2 + moves * 0.5)));
                                     exit(2);
                                 } else if (currentRoom.equals(library)) {
                                     System.out.println();
