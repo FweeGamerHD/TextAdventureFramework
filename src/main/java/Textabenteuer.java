@@ -43,9 +43,9 @@ public class Textabenteuer {
 
         Verbrauchsgegenstand lamp = new Verbrauchsgegenstand("Lampe", 1);
         Verbrauchsgegenstand spork = new Verbrauchsgegenstand("Göffel", 3);
-        Ausruestung book = new Ausruestung("Buch", 2, 2);
-        Ausruestung key = new Ausruestung("Schlüssel", 1, 1);
-        egg = new Ausruestung("Ei", 3, 3);
+        Ausruestung book = new Ausruestung("Buch", 2);
+        Ausruestung key = new Ausruestung("Schlüssel", 1);
+        egg = new Ausruestung("Ei", 3);
 
         basement = new Raum("Keller", false, true);
         hallway = new Raum("Gang", false, false); //connector from basement(start) to livingroom
