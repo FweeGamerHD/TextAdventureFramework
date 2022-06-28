@@ -355,7 +355,7 @@ public class Textabenteuer {
 
                 default:
                     System.out.println("");
-                    System.out.println("Ungütlige Eingabe.");
+                    System.out.println("Befehl nicht gefunden.");
                     System.out.println("");
                     turns -= 1;
                     break;
