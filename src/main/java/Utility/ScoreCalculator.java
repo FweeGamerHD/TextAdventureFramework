@@ -1,7 +1,15 @@
+/**
+ * @author Thierry Schmid
+ * @version 1.0
+ */
+
 package Utility;
 
 import java.util.ArrayList;
 
+/**
+ * Diese Klasse wird gebraucht, um die Punkte zu berechnen, die der Spieler am Ende des Spiels erhält.
+ */
 public class ScoreCalculator {
 
     private static ArrayList<Gegenstand> inventory;
