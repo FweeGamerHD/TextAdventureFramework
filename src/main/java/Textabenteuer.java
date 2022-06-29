@@ -203,135 +203,143 @@ public class Textabenteuer {
                     System.out.println();
                     System.out.println(ANSI_RED + "Welchen Gegenstand möchtest du nutzen? ");
                     String itemName2 = scanner.nextLine();
-                    for (Gegenstand item : items) {
-                        if (item.getName().equals(itemName2)) {
-                            if (item.getName().equals("Lampe")) {
-                                System.out.println();
-                                System.out.println(ANSI_GREEN + "Du stellst die Lampe an und untersuchst den Raum.");
-                                if (currentRoom.equals(library)) {
-                                    try {
-                                        Thread.sleep(2000);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println(ANSI_GREEN + "Du entdeckst einen seltsamen, leeren Platz im Bücherregal. Vielleicht passt dort etwas rein.");
-                                    librarycheck = true;
-                                } else {
+                    if (!(itemName2.equals("Lampe")) && !(itemName2.equals("Göffel")) && !(itemName2.equals("Ei")) && !(itemName2.equals("Schlüssel")) && !(itemName2.equals("Buch"))) {
+                        System.out.println(ANSI_RED + "Diesen Gegenstand kannst du nicht nutzen.");
+                        System.out.println("");
+                    } else {
+                        boolean check = false;
+                        for (Gegenstand item : items) {
+                            check = true;
+                            if (item.getName().equals(itemName2)) {
+                                if (item.getName().equals("Lampe")) {
                                     System.out.println();
-                                    System.out.println(ANSI_GREEN + "Die Lampe hilft dir im hellen Raum doch nichts. Du stellst sie wieder aus.");
+                                    System.out.println(ANSI_GREEN + "Du stellst die Lampe an und untersuchst den Raum.");
+                                    if (currentRoom.equals(library)) {
+                                        try {
+                                            Thread.sleep(2000);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println(ANSI_GREEN + "Du entdeckst einen seltsamen, leeren Platz im Bücherregal. Vielleicht passt dort etwas rein.");
+                                        librarycheck = true;
+                                    } else {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Die Lampe hilft dir im hellen Raum doch nichts. Du stellst sie wieder aus.");
+                                    }
+                                } else if (item.getName().equals("Göffel")) {
+                                    if (currentRoom.equals(livingroom) && !eggFound) {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du spielst mit dem Göffel herum und dummerweise reisst du dabei das Sofa auf.");
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println(ANSI_GREEN + "Aber warte, da ist doch ein Ei drin.");
+                                        System.out.println(ANSI_GREEN + "Du hast das Ei aufgehoben.");
+                                        livingroom.addItems(egg);
+                                        itemToAdd = egg;
+                                        eggFound = true;
+                                        try {
+                                            currentRoom.removeItem("Ei");
+                                        } catch (ItemNotInRoomException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    } else {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du spielst mit dem Göffel herum, du stichst dir selber in die Hand.");
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println(ANSI_GREEN + "Kann es sein dass du Dumm bist?");
+                                    }
+                                } else if (item.getName().equals("Schlüssel")) {
+                                    if (currentRoom.equals(kitchen)) {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du nutzt den Schlüssel und öffnest die Hintertür. Du gehts raus, dabei schliesst sich die Tür hinter dir.");
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println(ANSI_GREEN + "Vor dir taucht ein grosser Mann mit einer Axt auf, er tritt dich nieder und bevor du reagieren kannst hat er deinen Kopf von deinem Körper getrennt.");
+                                        System.out.println(ANSI_GREEN + "---------------------------");
+                                        System.out.println(ANSI_BLUE + "BAD ENDING");
+                                        System.out.println(ANSI_GREEN + "---------------------------");
+                                        int points = new ScoreCalculator(items).calculateScore();
+                                        System.out.println("Your points: " + points);
+                                        System.out.println("Your turns: " + turns);
+                                        System.out.println("Your moves: " + moves);
+                                        System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
+                                        exit(1);
+                                    } else {
+                                        System.out.println();
+                                        System.out.println("Es gibt hier keinen Ort in dem du den Schlüssel einstecken kannst.");
+                                    }
+                                } else if (item.getName().equals("Ei")) {
+                                    if (currentRoom.equals(kitchen)) {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du schlägst das Ei auf der Pfanne auf beginnst es zu kochen. Dabei hörst du, wie die Tür hinter dir aufgeht.");
+                                        try {
+                                            Thread.sleep(2000);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println(ANSI_GREEN + "Es ist ein seltsamer Mann mit einer Axt. Er scheint zu warten bis du das Ei fertig gekocht hast. \nIhr esst zusammen das Ei und geniesst euren Abend.");
+                                        System.out.println(ANSI_GREEN + "---------------------------");
+                                        System.out.println(ANSI_BLUE + "WEIRD ENDING");
+                                        System.out.println(ANSI_GREEN + "---------------------------");
+                                        int points = new ScoreCalculator(items).calculateScore();
+                                        System.out.println("Your points: " + points * 1.5);
+                                        System.out.println("Your turns: " + turns);
+                                        System.out.println("Your moves: " + moves);
+                                        System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
+                                        exit(3);
+                                    } else {
+                                        System.out.println();
+                                        System.out.println("Du wirfst das Ei an die Wand. Es geht kaputt.");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println("Was hast du erwartet?");
+                                        items.remove(egg);
+                                    }
+                                } else if (item.getName().equals("Buch")) {
+                                    if (currentRoom.equals(library) && librarycheck) {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du legst das Buch in die Öffnung rein, dabei scheint sich eine geheime Tür zu öffnen.");
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        System.out.println(ANSI_GREEN + "Du gehst hinein und siehst eine kleine Katze. Du entscheidest dich, sie zu streicheln. \nSie miaut und scheint es zu mögen, du könntest nicht glücklicher sein im Moment.");
+                                        System.out.println(ANSI_GREEN + "---------------------------");
+                                        System.out.println(ANSI_BLUE + "GOOD ENDING");
+                                        System.out.println(ANSI_GREEN + "---------------------------");
+                                        int points = new ScoreCalculator(items).calculateScore();
+                                        System.out.println("Your points: " + points * 2);
+                                        System.out.println("Your turns: " + turns);
+                                        System.out.println("Your moves: " + moves);
+                                        System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
+                                        exit(2);
+                                    } else if (currentRoom.equals(library)) {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du hast das Gefühl, das Buch gehört hier irgendwo hin. Du findest aber keinen passenden Ort.");
+                                    } else {
+                                        System.out.println();
+                                        System.out.println(ANSI_GREEN + "Du öffnest das Buch und blätterst durch die Seiten. Du kannst die Zeichen nicht lesen.");
+                                    }
                                 }
-                            } else if (item.getName().equals("Göffel")) {
-                                if (currentRoom.equals(livingroom) && !eggFound) {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du spielst mit dem Göffel herum und dummerweise reisst du dabei das Sofa auf.");
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println(ANSI_GREEN + "Aber warte, da ist doch ein Ei drin.");
-                                    System.out.println(ANSI_GREEN + "Du hast das Ei aufgehoben.");
-                                    livingroom.addItems(egg);
-                                    itemToAdd = egg;
-                                    eggFound = true;
-                                    try {
-                                        currentRoom.removeItem("Ei");
-                                    } catch (ItemNotInRoomException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                } else {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du spielst mit dem Göffel herum, du stichst dir selber in die Hand.");
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println(ANSI_GREEN + "Kann es sein dass du Dumm bist?");
-                                }
-                            } else if (item.getName().equals("Schlüssel")) {
-                                if (currentRoom.equals(kitchen)) {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du nutzt den Schlüssel und öffnest die Hintertür. Du gehts raus, dabei schliesst sich die Tür hinter dir.");
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println(ANSI_GREEN + "Vor dir taucht ein grosser Mann mit einer Axt auf, er tritt dich nieder und bevor du reagieren kannst hat er deinen Kopf von deinem Körper getrennt.");
-                                    System.out.println(ANSI_GREEN + "---------------------------");
-                                    System.out.println(ANSI_BLUE + "BAD ENDING");
-                                    System.out.println(ANSI_GREEN + "---------------------------");
-                                    int points = new ScoreCalculator(items).calculateScore();
-                                    System.out.println("Your points: " + points);
-                                    System.out.println("Your turns: " + turns);
-                                    System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
-                                    exit(1);
-                                } else {
-                                    System.out.println();
-                                    System.out.println("Es gibt hier keinen Ort in dem du den Schlüssel einstecken kannst.");
-                                }
-                            } else if (item.getName().equals("Ei")) {
-                                if (currentRoom.equals(kitchen)) {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du schlägst das Ei auf der Pfanne auf beginnst es zu kochen. Dabei hörst du, wie die Tür hinter dir aufgeht.");
-                                    try {
-                                        Thread.sleep(2000);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println(ANSI_GREEN + "Es ist ein seltsamer Mann mit einer Axt. Er scheint zu warten bis du das Ei fertig gekocht hast. \nIhr esst zusammen das Ei und geniesst euren Abend.");
-                                    System.out.println(ANSI_GREEN + "---------------------------");
-                                    System.out.println(ANSI_BLUE + "WEIRD ENDING");
-                                    System.out.println(ANSI_GREEN + "---------------------------");
-                                    int points = new ScoreCalculator(items).calculateScore();
-                                    System.out.println("Your points: " + points * 1.5);
-                                    System.out.println("Your turns: " + turns);
-                                    System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
-                                    exit(3);
-                                } else {
-                                    System.out.println();
-                                    System.out.println("Du wirfst das Ei an die Wand. Es geht kaputt.");
-                                    try {
-                                        Thread.sleep(250);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println("Was hast du erwartet?");
-                                    items.remove(egg);
-                                }
-                            } else if (item.getName().equals("Buch")) {
-                                if (currentRoom.equals(library) && librarycheck) {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du legst das Buch in die Öffnung rein, dabei scheint sich eine geheime Tür zu öffnen.");
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    System.out.println(ANSI_GREEN + "Du gehst hinein und siehst eine kleine Katze. Du entscheidest dich, sie zu streicheln. \nSie miaut und scheint es zu mögen, du könntest nicht glücklicher sein im Moment.");
-                                    System.out.println(ANSI_GREEN + "---------------------------");
-                                    System.out.println(ANSI_BLUE + "GOOD ENDING");
-                                    System.out.println(ANSI_GREEN + "---------------------------");
-                                    int points = new ScoreCalculator(items).calculateScore();
-                                    System.out.println("Your points: " + points * 2);
-                                    System.out.println("Your turns: " + turns);
-                                    System.out.println("Your moves: " + moves);
-                                    System.out.println("Your final score: " + (points - (turns * 0.05 + moves * 0.25)));
-                                    exit(2);
-                                } else if (currentRoom.equals(library)) {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du hast das Gefühl, das Buch gehört hier irgendwo hin. Du findest aber keinen passenden Ort.");
-                                } else {
-                                    System.out.println();
-                                    System.out.println(ANSI_GREEN + "Du öffnest das Buch und blätterst durch die Seiten. Du kannst die Zeichen nicht lesen.");
-                                }
-                            } else {
-                                System.out.println();
-                                System.out.println(ANSI_GREEN + "Du kannst diesen Gegenstand nicht benutzen.");
                             }
+                        }
+                        if (check == false) {
+                            System.out.println(ANSI_RED + "Du kannst diesen Gegenstand nicht benutzen.");
+                            System.out.println("");
                         }
                     }
                     if (itemToAdd != null) {
