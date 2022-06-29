@@ -6,7 +6,7 @@
 package Utility;
 
 /**
- * Ein Verbrauchsgegenstand wird dadurch von der AUsrüstung unterschieden, dass dieser nicht unbedingt eine Anforderung ist für ein Ende des Spiels.
+ * Ein Verbrauchsgegenstand wird dadurch von der Ausrüstung unterschieden, dass dieser nicht unbedingt eine Anforderung ist für ein Ende des Spiels.
  */
 public class Verbrauchsgegenstand extends Gegenstand {
 
