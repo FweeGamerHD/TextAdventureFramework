@@ -1,7 +1,6 @@
 package Utility;
 
 import Exceptions.ItemNotInRoomException;
-import org.junit.jupiter.api.BeforeAll;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,20 +55,18 @@ class RaumTest {
         try {
             raum.removeItem("Gegenstand1");
         } catch (ItemNotInRoomException e) {
-            throw new RuntimeException(e);
+            fail("ItemNotInRoomException not expected");
         }
-        assertEquals("", raum.getItems());
     }
     @org.junit.jupiter.api.Test
     public void removeItem2() {
         raum.addItems(gegenstand2);
-        assertEquals("Gegenstand2 ", raum.getItems());
         try {
-            raum.removeItem("Gegenstand2");
+            raum.removeItem("Gegenstand1");
+            fail("ItemNotInRoomException expected");
         } catch (ItemNotInRoomException e) {
             throw new RuntimeException(e);
         }
-        assertEquals("", raum.getItems());
     }
 
     @org.junit.jupiter.api.Test
