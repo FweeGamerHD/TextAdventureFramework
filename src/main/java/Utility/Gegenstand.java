@@ -1,10 +1,9 @@
+package Utility;
+
 /**
  * @author Thierry Schmid
  * @version 1.0
  */
-
-package Utility;
-
 /**
  * Die Klasse der Gegenstände, grundsätzlich wird hier schon alle wichtigen Attribute aufgelistet
  */

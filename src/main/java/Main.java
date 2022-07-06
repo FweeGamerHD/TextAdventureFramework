@@ -9,5 +9,7 @@ public class Main {
 
         Textabenteuer textabenteuer = new Textabenteuer();
         textabenteuer.start();
+
+        System.out.println("Emil sings like a cringe and goofy ahh.");
     }
 }

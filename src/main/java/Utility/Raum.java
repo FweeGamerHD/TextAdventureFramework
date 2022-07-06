@@ -1,14 +1,13 @@
-/**
- * @author Thierry Schmid
- * @version 1.0
- */
-
 package Utility;
 
 import Exceptions.ItemNotInRoomException;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thierry Schmid
+ * @version 1.0
+ */
 /**
  * Die Klasse Raum trägt einen Namen, sowei dynamisch erzeugte Nachbarräume und Gegenstände. Diese könnten durch ein Zufallssystem generiert werden.
  */

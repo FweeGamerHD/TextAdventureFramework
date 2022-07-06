@@ -1,8 +1,3 @@
-/**
- * @author Thierry Schmid
- * @version 1.0
- */
-
 import Exceptions.ItemNotInRoomException;
 import Utility.*;
 
@@ -12,6 +7,10 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
+/**
+ * @author Thierry Schmid
+ * @version 1.0
+ */
 /**
  * Textabenteuer steht für den Gamehandler, d.h. alle Aktionen werden von diesem Übernommen. Da dieses Programm Modular ist, kann man mehrere von diesen Erstellen und in der Main Methode ein unterschiedliches Spiel aufrufen
  */

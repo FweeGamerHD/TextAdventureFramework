@@ -1,14 +1,13 @@
-/**
- * @author Thierry Schmid
- * @version 1.0
- */
-
 package Utility;
 
 import Exceptions.ItemNotInRoomException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Thierry Schmid
+ * @version 1.0
+ */
 class RaumTest {
 
         Raum raum = new Raum("Raum", true, true);
