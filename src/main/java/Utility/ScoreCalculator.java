@@ -1,12 +1,11 @@
-/**
- * @author Thierry Schmid
- * @version 1.0
- */
-
 package Utility;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thierry Schmid
+ * @version 1.0
+ */
 /**
  * Diese Klasse wird gebraucht, um die Punkte zu berechnen, die der Spieler am Ende des Spiels erhält.
  */

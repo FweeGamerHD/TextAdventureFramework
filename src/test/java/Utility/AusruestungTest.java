@@ -1,12 +1,11 @@
-/**
- * @author Thierry Schmid
- * @version 1.0
- */
-
 package Utility;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Thierry Schmid
+ * @version 1.0
+ */
 class AusruestungTest {
 
     Ausruestung ausruestung = new Ausruestung("Ausrüstung", 1);

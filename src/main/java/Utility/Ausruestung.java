@@ -1,10 +1,9 @@
+package Utility;
+
 /**
  * @author Thierry Schmid
  * @version 1.0
  */
-
-package Utility;
-
 /**
  * Die Ausrüstung ist ein Gegenstand, welcher direkt genutzt wird für ein Ende des Spiels
  */
